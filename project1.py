@@ -58,8 +58,8 @@ for i, col_id in enumerate(range(1,8)):
 
 #Substract the mean / SVD
 Y = X - np.ones((N,1))*X.mean(axis=0)     
-Y = Y - np.ones((N,1))*X.std(axis=0)
-U,S,V = svd(Y,full_matrices=False)          
+Y = Y / np.ones((N,1))*X.std(axis=0)
+#U,S,V = svd(Y,full_matrices=False)          
 rho = (S*S) / (S*S).sum() 
 threshold = 0.9
 
@@ -99,7 +99,7 @@ plt.title('Maternal Health Risks: PCA')
 for c in range(3):
     # select indices belonging to class c:
     class_mask = y==c+1
-    plt.plot(Z[class_mask,i], Z[class_mask,j], 'o', alpha=.5)
+    plt.plot(Z[class_mask,i], Z[class_mask,j], 'o', alpha=1)
     print(Z[class_mask,i])
 plt.legend(classNames)
 plt.xlabel('PC{0}'.format(i+1))
