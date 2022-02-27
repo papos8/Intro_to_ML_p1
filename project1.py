@@ -70,7 +70,7 @@ plt.title('Maternal Health Risks: PCA')
 for c in range(3):
     # select indices belonging to class c:
     class_mask = y==c+1
-    plt.plot(Z[class_mask,i], Z[class_mask,j], 'o', alpha=.5)
+    plt.plot(Z[class_mask,i], Z[class_mask,j], 'o')
     print(Z[class_mask,i])
 plt.legend(classNames)
 plt.xlabel('PC{0}'.format(i+1))
@@ -78,3 +78,61 @@ plt.ylabel('PC{0}'.format(j+1))
 
 # Output result to screen
 plt.show()
+
+#Histogram for each attribute
+for i in range(7):
+    f = plt.figure()
+    plt.title('Normal distribution')
+    plt.xlabel(attributeNames[i])
+    plt.hist(X[:,i], bins=20, density=True)
+
+#Boxplot - Attributes
+
+##Tried to plot them all together
+#mask1=[0,1,2,5]
+
+#fig1 = plt.boxplot(X[:,mask1])
+#plt.xticks(range(1,5),["Age","Systolic BP", "Diastolic BP", "Heart Rate"],rotation=45,ha="right")
+#plt.title('Maternal Health data set - boxplot')
+#plt.show()
+
+
+#Boxplot for each attribute
+fig_AGE = plt.boxplot(X[:,0])
+plt.xticks(range(1,2),["Age"])
+plt.ylabel("(Years)")
+plt.title('Age - boxplot')
+plt.show()
+
+fig_SP = plt.boxplot(X[:,1])
+plt.xticks(range(1,2),["Systolic Pressure"])
+plt.ylabel("(mmHg)")
+plt.title('Systolic Pressure - boxplot')
+plt.show()
+
+fig_DP = plt.boxplot(X[:,2])
+plt.xticks(range(1,2),["Diastolic Blood Pressure"])
+plt.ylabel("(mmHg)")
+plt.title("Diastolic BP - boxplot")
+plt.show()
+
+fig_BG = plt.boxplot(X[:,3])
+plt.xticks(range(1,2),["Blood Glucose"])
+plt.ylabel("(mmol/L)")
+plt.title("Blood Glucose - boxplot")
+plt.show()
+
+fig_BT = plt.boxplot(X[:,4])
+plt.ylabel(["Temperature ($^\circ$C)"])
+plt.xticks(range(1,2),["Body Temperature"])
+plt.title("Body Temperature - boxplot")
+plt.show()
+
+fig_HR = plt.boxplot(X[:,5])
+plt.ylabel("(Beats per minute)")
+plt.xticks(range(1,2),["Heart Rate"])
+plt.title("Heart Rate - boxplot")
+plt.show()
+
+
+
