@@ -98,6 +98,8 @@ for i in range(7):
 
 
 #Boxplot for each attribute
+classNames=["Low Risk", "Mid Risk", "High Risk"]
+
 fig_AGE = plt.boxplot(X[:,0])
 plt.xticks(range(1,2),["Age"])
 plt.ylabel("(Years)")
@@ -135,4 +137,35 @@ plt.title("Heart Rate - boxplot")
 plt.show()
 
 
+#Boxplot / classes / all-together
+plt.figure(figsize=(14,7))
+for c in range(3):
+    plt.subplot(1,3,c+1)
+    class_mask = (y==c+1) # binary mask to extract elements of class c
 
+    
+    plt.boxplot(X[class_mask,:6])
+    plt.title('Class: {0}'.format(classNames[c]))
+    plt.title('Class: '+classNames[c])
+    plt.xticks(range(1,7), [a[:18] for a in attributeNames[:6]], rotation=45, ha="right")
+    #y_up = X.max()+(X.max()-X.min())*0.1; y_down = X.min()-(X.max()-X.min())*0.1
+    #plt.ylim(y_down, y_up)
+
+plt.show()
+
+#Boxplot - each attribute wth risk factor
+
+for j in range(6):
+    plt.figure(figsize=(14,7))
+    for c in range(3):
+        plt.subplot(1,3,c+1)
+        class_mask = (y==c+1) # binary mask to extract elements of class c
+
+    
+        plt.boxplot(X[class_mask,j])
+        plt.title('Class: {0}'.format(classNames[c]))
+        plt.title('Class: '+classNames[c])
+        plt.xticks(range(1,2), [attributeNames[j]], rotation=45, ha="right")
+        #y_up = X.max()+(X.max()-X.min())*0.1; y_down = X.min()-(X.max()-X.min())*0.1
+        #plt.ylim(y_down, y_up)
+    plt.show()
