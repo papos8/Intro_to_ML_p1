@@ -1,6 +1,7 @@
 #This file contains the summary of statistics for our dataset
 import math
 from data_preprocessing import *
+from scipy import stats
 
 mean = []
 
@@ -24,10 +25,10 @@ for i in range(K):
 print("The array of the variance is: " , var)
 
 #Create an array for the svd of the attributes
-svd = []
+std = []
 for i in range(K):
-    svd.append(round(math.sqrt(var[i]),2))
-print("The array of the standard deviation is: " , svd)
+    std.append(round(math.sqrt(var[i]),2))
+print("The array of the standard deviation is: " , std)
 
 #Create an array with the range of the values
 v_range = []
@@ -43,3 +44,8 @@ for i in range(K):
     v_max.append(t_data[i].max())
 print("The array of the min values is: " , v_min)
 print("The array of the max values is: " , v_max)
+
+#Compute mode of last attribute
+mode = stats.mode(t_data[6])
+#Print the mode (1)
+print("The mode of the risk level is", mode[0][0])

@@ -1,4 +1,4 @@
-﻿Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel
+Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel
 25,130,80,15,98,86,high risk
 35,140,90,13,98,70,high risk
 29,90,70,8,100,80,high risk
@@ -498,7 +498,7 @@
 23,90,60,7.9,98,76,low risk
 19,120,80,7,98,70,low risk
 15,76,49,7.9,98,77,low risk
-16,120,75,7.9,98,7,low risk
+16,120,75,7.9,98,74,low risk
 48,120,80,11,98,88,mid risk
 15,120,80,7.9,98,70,low risk
 63,140,90,15,98,90,high risk
@@ -907,7 +907,7 @@
 23,90,60,7.9,98,76,low risk
 19,120,80,7,98,70,low risk
 15,76,49,7.9,98,77,low risk
-16,120,75,7.9,98,7,low risk
+16,120,75,7.9,98,74,low risk
 15,120,80,7.9,98,70,low risk
 17,70,50,7.9,98,70,low risk
 17,90,60,7.5,101,76,low risk
