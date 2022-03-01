@@ -22,7 +22,7 @@ for i in range(7):
                 plt.xlabel(attributeNames[i])
                 plt.ylabel(attributeNames[j])
         k=k+1   
-           
+         
 #Create X matrix from raw_data
 X = np.empty((1014, 7))
 for i, col_id in enumerate(range(1,8)):
@@ -30,7 +30,7 @@ for i, col_id in enumerate(range(1,8)):
 
 #Substract the mean / SVD
 Y = X - np.ones((N,1))*X.mean(axis=0)
-Y = Y / np.ones((N,1))*X.std(axis=0)     
+Y = Y*(1/X.std(axis=0))    
 U,S,V = svd(Y,full_matrices=False)          
 rho = (S*S) / (S*S).sum() 
 threshold = 0.9
@@ -56,7 +56,10 @@ plt.show()
 U,S,Vh = svd(Y,full_matrices=False)
 
 V = Vh.T   
-
+B = []
+B.append(V[0])
+B.append(V[1])
+print()
 # Project the centered data onto principal component space
 Z = Y @ V
 
