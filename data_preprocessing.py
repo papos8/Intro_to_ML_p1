@@ -20,7 +20,7 @@ classNames = {"low risk":1,"mid risk":2, "high risk":3}
 y = np.asarray([classNames[value] for value in raw_data[:,-1]])
 
 N,M = raw_data.shape
-data = np.asarray(raw_data)
+data = np.asarray(raw_data,)
 
 
 #Transform the values of the last attribute to numerical

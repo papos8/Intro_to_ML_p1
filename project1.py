@@ -4,6 +4,8 @@ from data_preprocessing import *
 import matplotlib.pyplot as plt
 from scipy.linalg import svd
 import seaborn as sn
+#from toolbox_02450.similarity import similarity
+import pprint
 """
 Once we have load the data we visualize and apply PCA
 """
@@ -170,5 +172,14 @@ for j in range(6):
     
 
 
-corr_matrix = df.corr()
-print(corr_matrix)
+data = data.astype(float)
+corr_matrix = np.corrcoef(data,rowvar=False)
+for i in range(M):
+    for j in range(M):
+        corr_matrix[i][j] = round(corr_matrix[i][j],2 )
+df_corr_matrix = pd.DataFrame(corr_matrix, index=["Age", "Systolic BP", "Diastolic BP", "Blood Glucose", 
+                  "Body Temperature", "Heart Rate", "Risk Level"],columns=["Age", "Systolic BP", "Diastolic BP", "Blood Glucose", 
+                  "Body Temperature", "Heart Rate", "Risk Level"])
+pd.set_option('display.max_columns', None)
+pd.set_option('expand_frame_repr', False)
+print(df_corr_matrix)
