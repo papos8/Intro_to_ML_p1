@@ -183,3 +183,5 @@ df_corr_matrix = pd.DataFrame(corr_matrix, index=["Age", "Systolic BP", "Diastol
 pd.set_option('display.max_columns', None)
 pd.set_option('expand_frame_repr', False)
 print(df_corr_matrix)
+
+ax = sn.heatmap(corr_matrix, annot = True, vmin=0, vmax=1)
