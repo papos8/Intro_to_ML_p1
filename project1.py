@@ -29,7 +29,8 @@ for i, col_id in enumerate(range(1,8)):
     X[:, i] = np.asarray(raw_data[:,col_id-1])
 
 #Substract the mean / SVD
-Y = X - np.ones((N,1))*X.mean(axis=0)     
+Y = X - np.ones((N,1))*X.mean(axis=0)
+Y = Y / np.ones((N,1))*X.std(axis=0)     
 U,S,V = svd(Y,full_matrices=False)          
 rho = (S*S) / (S*S).sum() 
 threshold = 0.9
@@ -71,7 +72,7 @@ for c in range(3):
     # select indices belonging to class c:
     class_mask = y==c+1
     plt.plot(Z[class_mask,i], Z[class_mask,j], 'o')
-    print(Z[class_mask,i])
+    #print(Z[class_mask,i])
 plt.legend(classNames)
 plt.xlabel('PC{0}'.format(i+1))
 plt.ylabel('PC{0}'.format(j+1))
@@ -176,7 +177,7 @@ data = data.astype(float)
 corr_matrix = np.corrcoef(data,rowvar=False)
 for i in range(M):
     for j in range(M):
-        corr_matrix[i][j] = round(corr_matrix[i][j],2 )
+        corr_matrix[i][j] = round(corr_matrix[i][j],2)
 df_corr_matrix = pd.DataFrame(corr_matrix, index=["Age", "Systolic BP", "Diastolic BP", "Blood Glucose", 
                   "Body Temperature", "Heart Rate", "Risk Level"],columns=["Age", "Systolic BP", "Diastolic BP", "Blood Glucose", 
                   "Body Temperature", "Heart Rate", "Risk Level"])
