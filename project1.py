@@ -4,11 +4,12 @@ from data_preprocessing import *
 import matplotlib.pyplot as plt
 from scipy.linalg import svd
 import seaborn as sn
+from sklearn.decomposition import PCA
 #from toolbox_02450.similarity import similarity
 import pprint
 """
 Once we have load the data we visualize and apply PCA
-"""
+"""    
 plt.figure(figsize=(40,40))
 k=1
 for i in range(7):    
@@ -22,7 +23,7 @@ for i in range(7):
                 plt.xlabel(attributeNames[i])
                 plt.ylabel(attributeNames[j])
         k=k+1   
-         
+     
 #Create X matrix from raw_data
 X = np.empty((1014, 7))
 for i, col_id in enumerate(range(1,8)):
@@ -52,20 +53,27 @@ plt.legend(['Individual','Cumulative','Threshold'])
 plt.grid()
 plt.show()
 
+
+
+
+
+
 # PCA by computing SVD of Y
 U,S,Vh = svd(Y,full_matrices=False)
 
 V = Vh.T   
-B = []
-B.append(V[0])
-B.append(V[1])
-print()
+B = np.column_stack((V[0],V[1]))
+print(B)
 # Project the centered data onto principal component space
 Z = Y @ V
-
 # Indices of the principal components to be plotted
 i = 0
 j = 1
+
+
+
+
+
 
 # Plot PCA of the data
 f = plt.figure()
@@ -83,13 +91,24 @@ plt.ylabel('PC{0}'.format(j+1))
 # Output result to screen
 plt.show()
 
-#Histogram for each attribute
-for i in range(7):
+'''
+#Attributes Histograms
+for i in range(M):
     f = plt.figure()
-    plt.title('Normal distribution')
+    plt.title(attributeNames[i] + ' Histogram')
     plt.xlabel(attributeNames[i])
-    plt.hist(X[:,i], bins=20, density=True)
+    plt.hist(X[:,i], bins=15, density=True,range=(min(X[:,i]),max(X[:,i])))
 plt.show()
+'''
+for i in range(M):
+    p = plt.figure(figsize=(8,6))
+    plt.title(attributeNames[i] + ' Histogram')
+    plt.hist(X[:,i], bins = 15, density= True)
+    plt.xlabel(attributeNames[i])
+    #ylim(0,N/5)
+    plt.show()
+
+
 #Boxplot - Attributes
 
 ##Tried to plot them all together
@@ -177,15 +196,21 @@ for j in range(6):
 
 
 data = data.astype(float)
-corr_matrix = np.corrcoef(data,rowvar=False)
-for i in range(M):
-    for j in range(M):
-        corr_matrix[i][j] = round(corr_matrix[i][j],2)
-df_corr_matrix = pd.DataFrame(corr_matrix, index=["Age", "Systolic BP", "Diastolic BP", "Blood Glucose", 
-                  "Body Temperature", "Heart Rate", "Risk Level"],columns=["Age", "Systolic BP", "Diastolic BP", "Blood Glucose", 
-                  "Body Temperature", "Heart Rate", "Risk Level"])
-pd.set_option('display.max_columns', None)
-pd.set_option('expand_frame_repr', False)
-print(df_corr_matrix)
+G,K = data.shape
+print(K)
 
-ax = sn.heatmap(corr_matrix, annot = True, vmin=0, vmax=1)
+correlation_data = {"Age": data[:,0],
+                    "Systolic BP": data[:,1],
+                    "Diastolic BP": data[:,2],
+                    "Blood Glucose": data[:,3],
+                    "Body Temperature": data[:,4],
+                    "Heart Rate": data[:,5],
+                    "Risk Level": data[:,6],
+                    }
+
+dataFrame = pd.DataFrame(correlation_data, columns=["Age", "Systolic BP", "Diastolic BP", "Blood Glucose", 
+                  "Body Temperature", "Heart Rate", "Risk Level"])
+corr_matrix = dataFrame.corr()
+sn.set(rc={'figure.figsize':(10,10)})
+sn.heatmap(corr_matrix, annot=True)
+plt. show()
