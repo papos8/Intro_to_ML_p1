@@ -24,7 +24,7 @@ model = LogisticRegression()
 model.fit(X_train,y_train)
 LogisticRegression()
 
-#Accuracy
+#Calculate Logistic Regression accuracy
 accuracy_LR = model.score(X_train,y_train)
 
 #Testing
@@ -32,6 +32,7 @@ y_est = model.predict(X_test)
 
 #Residual
 residual_LR = y_est-y_test
+
 
 #BASELINE CLASSIFICATION
 
@@ -43,17 +44,18 @@ for i in y:
     if np.count_nonzero(y==i) > max_class:
         max_class = np.count_nonzero(y==i)
         max_class_id = i
-
+#Calculate baseline accuracy
 accuracy_baseline = max_class / len(y)
 
 
 #KNN
 
 
+#Euclidean Distance Function
 def euclidean_distance(x1, x2):
     return np.sqrt(np.sum((x1 - x2) ** 2))
 
-
+#KNN algorithm
 class KNN:
     def __init__(self, k=3):
         self.k = k
@@ -78,23 +80,22 @@ class KNN:
         return most_common[0][0]
 
 
-
-
-    
-
+#Calculate KNN accuracy
 def accuracy_KNN(y_true, y_pred):
      accuracy_KNN = np.sum(y_true == y_pred) / len(y_true)
      return accuracy_KNN
 
-
+#Run KNN
 k = 4
 clf = KNN(k=k)
 clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
+
+#KNN residual
 residual_KNN = predictions - y_test
-print("KNN classification accuracy", accuracy_KNN(y_test, predictions))
 
 
+#Final results
 print("Logistic Regression accuracy", accuracy_LR)
 print("Baseline accuracy", accuracy_baseline)
 print("KNN accuracy",accuracy_KNN(y_test, predictions))
