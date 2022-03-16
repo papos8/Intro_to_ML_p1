@@ -1,23 +1,22 @@
-from project1 import *
+from project1 import data_import
 from collections import Counter
-from Classification import *
-from matplotlib.pylab import figure, plot, subplot, xlabel, ylabel, hist, show, scatter
+#from matplotlib.pylab import figure, plot, subplot, xlabel, ylabel, hist, show, scatter
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 import numpy as np
-import seaborn as sns
-import pandas as pd
-import matplotlib as plt
+#import seaborn as sns
+#import pandas as pd
+#import matplotlib as plt
 
 #LINEAR REGRESSION
 
-
+X = data_import()
 #Prepare the data - Input/Output
 y = X[:,6]
-X_LR = X[:,0:6]
+X_cl = X[:,0:6]
 
 #Split the data to 80% train set / 20% test set
-X_train, X_test, y_train, y_test = train_test_split(X_LR, y, test_size=0.20)
+X_train, X_test, y_train, y_test = train_test_split(X_cl, y, test_size=0.20)
 
 #Linear Regression
 model = LogisticRegression()

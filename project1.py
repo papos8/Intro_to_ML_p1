@@ -24,9 +24,13 @@ for i in range(7):
         k=k+1   
            
 #Create X matrix from raw_data
-X = np.empty((1014, 7))
-for i, col_id in enumerate(range(1,8)):
-    X[:, i] = np.asarray(raw_data[:,col_id-1])
+def data_import():
+    X = np.empty((1014, 7))
+    for i, col_id in enumerate(range(1,8)):
+        X[:, i] = np.asarray(raw_data[:,col_id-1])
+    return X
+X = data_import()
+
 
 #Substract the mean / SVD
 Y = X - np.ones((N,1))*X.mean(axis=0)     
@@ -125,7 +129,7 @@ plt.title("Blood Glucose - boxplot")
 plt.show()
 
 fig_BT = plt.boxplot(X[:,4])
-plt.ylabel(["Temperature ($^\circ$C)"])
+plt.ylabel("Temperature (\u00B0C)")
 plt.xticks(range(1,2),["Body Temperature"])
 plt.title("Body Temperature - boxplot")
 plt.show()
